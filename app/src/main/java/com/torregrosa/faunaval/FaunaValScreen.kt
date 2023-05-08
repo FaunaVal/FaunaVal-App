@@ -7,20 +7,16 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.torregrosa.faunaval.data.DataSource.buttonsCategories
 import com.torregrosa.faunaval.data.DataSource.buttonsOptions
+import com.torregrosa.faunaval.ui.CategoriesScreen
 import com.torregrosa.faunaval.ui.StartScreen
 import com.torregrosa.faunaval.ui.theme.BackgroundColor
-
-enum class FaunaValScreen() {
-    Start,
-    Flavor,
-    Pickup,
-    Summary
-}
 
 @Composable
 fun FaunaValAppBar(
@@ -62,15 +58,16 @@ fun FaunaValApp(modifier: Modifier = Modifier) {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = FaunaValScreen.Start.name,
+            startDestination = "Start",
             modifier = modifier.padding(innerPadding)
         )
         {
-            composable(route = FaunaValScreen.Start.name) {
-                StartScreen(
-                    quantityOptions = buttonsOptions
-                )
+            composable("Start") {
+                StartScreen(navController)
 
+            }
+            composable("Categories") {
+                CategoriesScreen(navController)
             }
         }
     }

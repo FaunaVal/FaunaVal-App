@@ -13,21 +13,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.torregrosa.faunaval.R
-import com.torregrosa.faunaval.data.DataSource.buttonsOptions
 import com.torregrosa.faunaval.ui.theme.BackgroundColor
 import com.torregrosa.faunaval.ui.theme.ButtonColor
 import com.torregrosa.faunaval.ui.theme.TextBackgroundColor
 
 @Composable
 fun StartScreen(
-    quantityOptions: List<Pair<Int, Int>>,
-    // TODO: add onNextButtonClicked
+    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
 
@@ -40,13 +40,11 @@ fun StartScreen(
     ) {
         TitleImage()
         Spacer(modifier = Modifier.height(8.dp))
-        quantityOptions.forEach { item ->
-            Spacer(modifier = Modifier.height(30.dp))
-            SelectQuantityButton(
-                labelResourceId = item.first,
-                onClick = { /* TODO: handle next button */ }
-            )
-        }
+        SelectOptionButton(labelResourceId = R.string.identificar, onClick = { /*TODO*/ })
+        SelectOptionButton(
+            labelResourceId = R.string.explorar,
+            onClick = { navController.navigate("Categories") })
+        SelectOptionButton(labelResourceId = R.string.colaborar, onClick = { /*TODO*/ })
     }
 }
 
@@ -87,17 +85,18 @@ fun TitleImage(modifier: Modifier = Modifier) {
  * and triggers [onClick] lambda when this composable is clicked
  */
 @Composable
-fun SelectQuantityButton(
+fun SelectOptionButton(
     @StringRes labelResourceId: Int,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier.widthIn(min = 250.dp),
+        modifier = modifier
+            .widthIn(min = 250.dp)
+            .padding(top = 30.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = ButtonColor
-
         )
     ) {
         Text(stringResource(labelResourceId), style = MaterialTheme.typography.h4)
@@ -106,6 +105,6 @@ fun SelectQuantityButton(
 
 @Preview(showBackground = true)
 @Composable
-fun StartOrderPreview() {
-    StartScreen(quantityOptions = buttonsOptions)
+fun StartScreenPreview() {
+    StartScreen(navController = NavHostController(LocalContext.current))
 }

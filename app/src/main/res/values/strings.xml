@@ -3,4 +3,9 @@
     <string name="identificar">Identificar</string>
     <string name="explorar">Explorar</string>
     <string name="colaborar">Colaborar</string>
+    <string name="mamiferos">Mamíferos</string>
+    <string name="reptiles">Reptiles</string>
+    <string name="aves">Aves</string>
+    <string name="anfibios">Anfibios</string>
+    <string name="categorias">Categorias</string>
 </resources>
