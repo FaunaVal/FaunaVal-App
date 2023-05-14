@@ -19,7 +19,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.torregrosa.faunaval.AnimalViewModel
 import com.torregrosa.faunaval.R
 import com.torregrosa.faunaval.ui.theme.BackgroundColor
 import com.torregrosa.faunaval.ui.theme.ButtonColor
@@ -28,7 +30,8 @@ import com.torregrosa.faunaval.ui.theme.TextBackgroundColor
 @Composable
 fun StartScreen(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel : AnimalViewModel = hiltViewModel()
 ) {
 
     Column(
@@ -43,7 +46,8 @@ fun StartScreen(
         SelectOptionButton(labelResourceId = R.string.identificar, onClick = { /*TODO*/ })
         SelectOptionButton(
             labelResourceId = R.string.explorar,
-            onClick = { navController.navigate("Categories") })
+            onClick = { navController.navigate("Categories")
+            })
         SelectOptionButton(labelResourceId = R.string.colaborar, onClick = { /*TODO*/ })
     }
 }

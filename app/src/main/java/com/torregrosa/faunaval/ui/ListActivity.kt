@@ -10,7 +10,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import com.torregrosa.faunaval.AnimalViewModel
 import com.torregrosa.faunaval.model.Animal
+import kotlinx.coroutines.runBlocking
 
 
 @Composable
@@ -18,17 +22,17 @@ fun AnimalCard(animal: Animal, modifier: Modifier = Modifier) {
     Card(modifier = modifier.padding(8.dp), elevation = 4.dp) {
         Column {
             Text(
-                text = animal.name,
+                text = animal.nombreComun,
                 modifier = Modifier.padding(16.dp),
                 style = MaterialTheme.typography.h6
             )
             Text(
-                text = animal.scientificName,
+                text = animal.nombreCient,
                 modifier = Modifier.padding(16.dp),
                 style = MaterialTheme.typography.h6
             )
             Text(
-                text = animal.family,
+                text = "hola",
                 modifier = Modifier.padding(16.dp),
                 style = MaterialTheme.typography.h6
             )
@@ -44,4 +48,9 @@ private fun AnimalList(animalList: List<Animal>, modifier: Modifier = Modifier) 
             AnimalCard(animal = animal)
         }
     }
+}
+
+@Composable
+fun AnimalListScreen(navController: NavHostController, viewModel : AnimalViewModel = hiltViewModel()) {
+        AnimalList(runBlocking { viewModel.getAnimalList() })
 }

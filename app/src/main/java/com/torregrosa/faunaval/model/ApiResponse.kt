@@ -1,5 +1,5 @@
 package com.torregrosa.faunaval.model
 
-class ApiResponse(){
-
-}
+data class ApiResponse(
+    var animalList: List<Animal> = emptyList()
+)

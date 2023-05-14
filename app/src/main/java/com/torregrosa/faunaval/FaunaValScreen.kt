@@ -7,13 +7,13 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.torregrosa.faunaval.data.DataSource.buttonsCategories
-import com.torregrosa.faunaval.data.DataSource.buttonsOptions
+import com.torregrosa.faunaval.repository.AnimalRepository
+import com.torregrosa.faunaval.ui.AnimalListScreen
 import com.torregrosa.faunaval.ui.CategoriesScreen
 import com.torregrosa.faunaval.ui.StartScreen
 import com.torregrosa.faunaval.ui.theme.BackgroundColor
@@ -42,7 +42,7 @@ fun FaunaValAppBar(
 }
 
 @Composable
-fun FaunaValApp(modifier: Modifier = Modifier) {
+fun FaunaValApp( modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     // TODO: Get current back stack entry
 
@@ -68,6 +68,9 @@ fun FaunaValApp(modifier: Modifier = Modifier) {
             }
             composable("Categories") {
                 CategoriesScreen(navController)
+            }
+            composable("AnimalList") {
+                AnimalListScreen(navController)
             }
         }
     }

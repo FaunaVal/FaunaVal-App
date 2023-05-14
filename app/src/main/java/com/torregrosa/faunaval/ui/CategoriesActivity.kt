@@ -41,7 +41,7 @@ fun CategoriesScreen(
     ) {
         Title()
         Spacer(modifier = Modifier.height(20.dp))
-        ButtonGrid()
+        ButtonGrid(navController)
     }
 }
 
@@ -98,12 +98,14 @@ fun SelectCategoryButton(
 }
 
 @Composable
-fun ButtonGrid(){
+fun ButtonGrid(navController: NavHostController,){
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier.fillMaxWidth()
     ) {
-        SelectCategoryButton(labelResourceId = R.string.mamiferos, drawableResId = R.drawable.mamifero , onClick = { /*TODO*/ })
+        SelectCategoryButton(labelResourceId = R.string.mamiferos, drawableResId = R.drawable.mamifero , onClick = {
+            navController.navigate("AnimalList")
+        })
         SelectCategoryButton(labelResourceId = R.string.aves, drawableResId = R.drawable.ave , onClick = { /*TODO*/ })
     }
     Spacer(modifier = Modifier.height(8.dp))
