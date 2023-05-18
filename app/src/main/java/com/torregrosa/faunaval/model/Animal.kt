@@ -8,5 +8,5 @@ data class Animal(
     val orden: String,
     val familia: String,
     val descripcion: String,
-    val fotos : List<Foto>
+    val fotosDTO : List<Foto>
 )

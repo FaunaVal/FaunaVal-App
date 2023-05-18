@@ -8,4 +8,8 @@
     <string name="aves">Aves</string>
     <string name="anfibios">Anfibios</string>
     <string name="categorias">Categorias</string>
+    <string name="descripcion">Descripción</string>
+    <string name="orden">Orden : %1$s</string>
+    <string name="familia">Familia : %1$s</string>
+    <string name="clase">Clase : %1$s</string>
 </resources>

@@ -9,14 +9,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.torregrosa.faunaval.model.Animal
 import com.torregrosa.faunaval.repository.AnimalRepository
+import com.torregrosa.faunaval.ui.AnimalDetail
 import com.torregrosa.faunaval.ui.AnimalListScreen
 import com.torregrosa.faunaval.ui.CategoriesScreen
 import com.torregrosa.faunaval.ui.StartScreen
 import com.torregrosa.faunaval.ui.theme.BackgroundColor
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun FaunaValAppBar(
@@ -42,7 +47,7 @@ fun FaunaValAppBar(
 }
 
 @Composable
-fun FaunaValApp( modifier: Modifier = Modifier) {
+fun FaunaValApp( modifier: Modifier = Modifier, viewModel: AnimalViewModel = hiltViewModel()) {
     val navController = rememberNavController()
     // TODO: Get current back stack entry
 
@@ -71,6 +76,13 @@ fun FaunaValApp( modifier: Modifier = Modifier) {
             }
             composable("AnimalList") {
                 AnimalListScreen(navController)
+            }
+            composable("AnimalDetail/{animalId}",
+                arguments = listOf(navArgument("animalId") { type = NavType.IntType })){
+                    backStackEntry ->
+                val index = backStackEntry.arguments?.getInt("animalId") ?: 0
+                val animal = runBlocking { viewModel.getAnimal(index) }
+                AnimalDetail(animal,navController)
             }
         }
     }
