@@ -31,7 +31,7 @@ import com.torregrosa.faunaval.ui.theme.TextBackgroundColor
 fun StartScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    viewModel : AnimalViewModel = hiltViewModel()
+    viewModel: AnimalViewModel = hiltViewModel()
 ) {
 
     Column(
@@ -46,9 +46,10 @@ fun StartScreen(
         SelectOptionButton(labelResourceId = R.string.identificar, onClick = { /*TODO*/ })
         SelectOptionButton(
             labelResourceId = R.string.explorar,
-            onClick = { navController.navigate("Categories")
-            })
-        SelectOptionButton(labelResourceId = R.string.colaborar, onClick = { /*TODO*/ })
+            onClick = { navController.navigate("Categories") })
+        SelectOptionButton(
+            labelResourceId = R.string.colaborar,
+            onClick = { navController.navigate("Contact") })
     }
 }
 

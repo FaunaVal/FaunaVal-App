@@ -12,4 +12,10 @@
     <string name="orden">Orden : %1$s</string>
     <string name="familia">Familia : %1$s</string>
     <string name="clase">Clase : %1$s</string>
+    <string name="email">info@faunaval.es</string>
+    <string name="introduce_nombre">Introduce tu nombre</string>
+    <string name="introduce_asunto">Introduce el asunto</string>
+    <string name="escribe_mensaje">Escribe tu mensaje</string>
+    <string name="elige_cliente">\"Elija un cliente de Email : \"</string>
+    <string name="enviar_boton">Enviar Email</string>
 </resources>

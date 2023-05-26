@@ -25,7 +25,7 @@ import com.torregrosa.faunaval.ui.theme.BackgroundColor
 import com.torregrosa.faunaval.ui.theme.TextBackgroundColor
 
 @Composable
-fun AnimalDetail(animal: Animal, navController: NavHostController) {
+fun AnimalDetail(animal: Animal) {
     AnimalDetailColumn(animal = animal)
 }
 
