@@ -16,7 +16,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.torregrosa.faunaval.R
 import com.torregrosa.faunaval.model.Animal
@@ -38,7 +37,7 @@ fun AnimalDetailColumn(animal: Animal) {
             .background(BackgroundColor),
         verticalArrangement = Arrangement.Top,
     ) {
-        AnimalImage(url = animal.fotosDTO[0].url)
+        AnimalImage(url = animal.fotos[0].url)
         InfoColumn(animal = animal)
         DescriptionColumn(description = animal.descripcion)
     }

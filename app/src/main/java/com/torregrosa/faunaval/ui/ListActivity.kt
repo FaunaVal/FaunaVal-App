@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -40,7 +41,7 @@ fun AnimalCard(animal: Animal, onClick: () -> Unit, modifier: Modifier = Modifie
             verticalAlignment = Alignment.CenterVertically,
         ) {
             AsyncImage(
-                model = animal.fotosDTO[0].url,
+                model = animal.fotos[0].url,
                 contentDescription = null,
                 modifier = Modifier
                     .size(130.dp, 100.dp)
@@ -55,7 +56,8 @@ fun AnimalCard(animal: Animal, onClick: () -> Unit, modifier: Modifier = Modifie
                 Text(
                     text = animal.nombreComun,
                     modifier = Modifier.padding(bottom = 8.dp),
-                    style = MaterialTheme.typography.h4
+                    style = MaterialTheme.typography.h5,
+                    textAlign = TextAlign.Center
                 )
                 Text(
                     text = animal.nombreCient,
