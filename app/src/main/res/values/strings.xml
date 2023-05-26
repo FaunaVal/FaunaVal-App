@@ -18,4 +18,5 @@
     <string name="escribe_mensaje">Escribe tu mensaje</string>
     <string name="elige_cliente">\"Elija un cliente de Email : \"</string>
     <string name="enviar_boton">Enviar Email</string>
+    <string name="colabora_text">Si quieres colaborar, ya sea sugiriendo un animal que falta o corrigiendo algún error, rellena el siguiente formulario:</string>
 </resources>

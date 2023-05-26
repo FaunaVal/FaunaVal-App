@@ -4,7 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -18,12 +20,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.torregrosa.faunaval.R
 import com.torregrosa.faunaval.ui.theme.BackgroundColor
 import com.torregrosa.faunaval.ui.theme.ButtonColor
+import com.torregrosa.faunaval.ui.theme.TextBackgroundColor
 
 @Composable
 fun ContactForm() {
@@ -38,9 +42,42 @@ fun ContactFormPage() {
             .background(BackgroundColor),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        TitleContact()
+        TextContact()
         FormColumn()
     }
 
+}
+
+@Composable
+fun TextContact(modifier: Modifier = Modifier) {
+    Text(
+        text = stringResource(R.string.colabora_text),
+        style = MaterialTheme.typography.h6,
+        modifier = Modifier.padding(15.dp),
+        color = Color.White,
+        textAlign = TextAlign.Justify
+    )
+}
+
+@Composable
+fun TitleContact(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .padding(top = 20.dp)
+            .fillMaxWidth()
+            .height(70.dp)
+            .background(TextBackgroundColor.copy(alpha = 0.5f)),
+
+        Alignment.Center
+    ) {
+        Text(
+            text = stringResource(R.string.colaborar).uppercase(),
+            style = MaterialTheme.typography.h3,
+            letterSpacing = 5.sp,
+            color = Color.White
+        )
+    }
 }
 
 @Composable
@@ -63,7 +100,8 @@ fun FormColumn() {
             .fillMaxWidth()
             .padding(10.dp)
             .clip(shape = RoundedCornerShape(10.dp))
-            .background(ButtonColor),
+            .background(ButtonColor)
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -85,7 +123,10 @@ fun FormColumn() {
                 type = "text/plain"
                 putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
                 putExtra(Intent.EXTRA_SUBJECT, emailSubject.value.text)
-                putExtra(Intent.EXTRA_TEXT, senderName.value.text + System.lineSeparator() + emailBody.value.text)
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    senderName.value.text + System.lineSeparator() + emailBody.value.text
+                )
             }
             i.type = "message/rfc822"
             context.startActivity(Intent.createChooser(i, chooseClientText))

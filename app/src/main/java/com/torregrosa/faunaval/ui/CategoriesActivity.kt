@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -58,7 +59,8 @@ fun Title(modifier: Modifier = Modifier) {
         Text(
             text = stringResource(R.string.categorias).uppercase(),
             style = MaterialTheme.typography.h3,
-            letterSpacing = 5.sp
+            letterSpacing = 5.sp,
+            color = Color.White
         )
     }
 }
