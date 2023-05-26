@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -67,7 +66,7 @@ fun Title(modifier: Modifier = Modifier) {
 @Composable
 fun SelectCategoryButton(
     @StringRes labelResourceId: Int,
-    @DrawableRes drawableResId : Int,
+    @DrawableRes drawableResId: Int,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -85,7 +84,7 @@ fun SelectCategoryButton(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally,
-            ){
+        ) {
             Image(
                 painter = painterResource(id = drawableResId),
                 contentDescription = null,
@@ -98,23 +97,33 @@ fun SelectCategoryButton(
 }
 
 @Composable
-fun ButtonGrid(navController: NavHostController,){
+fun ButtonGrid(navController: NavHostController) {
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier.fillMaxWidth()
     ) {
-        SelectCategoryButton(labelResourceId = R.string.mamiferos, drawableResId = R.drawable.mamifero , onClick = {
-            navController.navigate("AnimalList")
-        })
-        SelectCategoryButton(labelResourceId = R.string.aves, drawableResId = R.drawable.ave , onClick = { /*TODO*/ })
+        SelectCategoryButton(
+            labelResourceId = R.string.mamiferos,
+            drawableResId = R.drawable.mamifero,
+            onClick = { navController.navigate("AnimalList/1") })
+        SelectCategoryButton(
+            labelResourceId = R.string.aves,
+            drawableResId = R.drawable.ave,
+            onClick = { navController.navigate("AnimalList/2") })
     }
     Spacer(modifier = Modifier.height(8.dp))
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier.fillMaxWidth()
     ) {
-        SelectCategoryButton(labelResourceId = R.string.reptiles, drawableResId = R.drawable.reptil , onClick = { /*TODO*/ })
-        SelectCategoryButton(labelResourceId = R.string.anfibios, drawableResId = R.drawable.anfibio , onClick = { /*TODO*/ })
+        SelectCategoryButton(
+            labelResourceId = R.string.reptiles,
+            drawableResId = R.drawable.reptil,
+            onClick = { navController.navigate("AnimalList/3") })
+        SelectCategoryButton(
+            labelResourceId = R.string.anfibios,
+            drawableResId = R.drawable.anfibio,
+            onClick = { navController.navigate("AnimalList/4") })
     }
 }
 

@@ -6,8 +6,10 @@ import retrofit2.http.Path
 
 interface RestDataSource {
 
-    @GET("animales")
-    suspend fun getAnimalList(): List<Animal>
+    @GET("animales/list/{id}")
+    suspend fun getAnimalList(
+        @Path("id") id: Int
+    ): List<Animal>
 
     @GET("animales/{id}")
     suspend fun getAnimalById(

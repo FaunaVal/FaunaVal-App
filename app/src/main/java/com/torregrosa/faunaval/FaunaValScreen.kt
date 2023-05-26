@@ -69,10 +69,15 @@ fun FaunaValApp(modifier: Modifier = Modifier, viewModel: AnimalViewModel = hilt
             composable("Categories") {
                 CategoriesScreen(navController)
             }
-            composable("AnimalList") {
-                AnimalListScreen(navController)
+            composable(
+                "AnimalList/{categoryId}",
+                arguments = listOf(navArgument("categoryId") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val categoryId = backStackEntry.arguments?.getInt("categoryId") ?: 0
+                AnimalListScreen(navController, categoryId)
             }
-            composable("AnimalDetail/{animalId}",
+            composable(
+                "AnimalDetail/{animalId}",
                 arguments = listOf(navArgument("animalId") { type = NavType.IntType })
             ) { backStackEntry ->
                 val index = backStackEntry.arguments?.getInt("animalId") ?: 0

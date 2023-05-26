@@ -1,6 +1,5 @@
 package com.torregrosa.faunaval.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,13 +11,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
 import com.torregrosa.faunaval.AnimalViewModel
 import com.torregrosa.faunaval.model.Animal
 import com.torregrosa.faunaval.model.Foto
@@ -47,12 +44,14 @@ fun AnimalCard(animal: Animal, onClick: () -> Unit, modifier: Modifier = Modifie
                 contentDescription = null,
                 modifier = Modifier
                     .size(130.dp, 100.dp)
-                    .padding(5.dp,),
+                    .padding(5.dp),
             )
-            Column (modifier = Modifier
-                .padding(start = 5.dp)
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally){
+            Column(
+                modifier = Modifier
+                    .padding(start = 5.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
                     text = animal.nombreComun,
                     modifier = Modifier.padding(bottom = 8.dp),
@@ -73,7 +72,8 @@ fun AnimalCard(animal: Animal, onClick: () -> Unit, modifier: Modifier = Modifie
 private fun AnimalList(
     navController: NavHostController,
     animalList: List<Animal>,
-    modifier: Modifier = Modifier) {
+    modifier: Modifier = Modifier
+) {
     LazyColumn(
         modifier = modifier
             .fillMaxWidth()
@@ -89,9 +89,10 @@ private fun AnimalList(
 @Composable
 fun AnimalListScreen(
     navController: NavHostController,
+    categoryId: Int,
     viewModel: AnimalViewModel = hiltViewModel()
 ) {
-    AnimalList(navController, runBlocking { viewModel.getAnimalList() })
+    AnimalList(navController, runBlocking { viewModel.getAnimalList(categoryId) })
 }
 
 @Preview(showBackground = true)
@@ -101,6 +102,6 @@ fun ListPreview() {
         animal = Animal(
             1, "Zorro", "Raposa", "Marrón", "Ordenad", "Familiar", "SuperBonico",
             listOf(Foto(1, "https://bddb.gva.es/bancodedatos/imagenes/BIO_IMAGENES/6_5939.jpg"))
-        ), onClick =  {}
+        ), onClick = {}
     )
 }
