@@ -24,6 +24,14 @@ class AnimalViewModel @Inject constructor(
         return animalList.await()
     }
 
+    suspend fun getAnimalListFiltered(id: Int, filter: String?): List<Animal> {
+        var animalList = viewModelScope.async(Dispatchers.IO) {
+            return@async animalRepositoryImp.getAnimalListFiltered(id, filter)
+        }
+        Log.d("VIEW_MODEL", "Animals Received: ${animalList.await().size}")
+        return animalList.await()
+    }
+
     suspend fun getAnimal(id: Int): Animal {
         var animal = viewModelScope.async(Dispatchers.IO) {
             return@async animalRepositoryImp.getAnimalById(id)

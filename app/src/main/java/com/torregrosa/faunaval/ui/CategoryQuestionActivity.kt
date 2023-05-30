@@ -1,15 +1,24 @@
 package com.torregrosa.faunaval.ui
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.RadioButton
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 
 @Composable
-fun AnimalTypeQuestionScreen() {
+fun AnimalTypeQuestionScreen(navController: NavController) {
     var selectedOption by remember { mutableStateOf("") }
 
     Column(
@@ -26,50 +35,53 @@ fun AnimalTypeQuestionScreen() {
         )
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             RadioButton(
-                selected = selectedOption == "Tiene pelo?",
-                onClick = { selectedOption = "Tiene pelo?" }
+                selected = selectedOption == "1",
+                onClick = { selectedOption = "1" }
             )
             Text(
-                text = "Tiene pelo?",
+                text = "Animal con pelo y 4 patas (Mamífero)",
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(start = 24.dp)
             )
         }
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             RadioButton(
-                selected = selectedOption == "Tiene plumas?",
-                onClick = { selectedOption = "Tiene plumas?" }
+                selected = selectedOption == "2",
+                onClick = { selectedOption = "2" }
             )
             Text(
-                text = "Tiene plumas?",
+                text = "Animal con plumas, alas y pico (Aves)",
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(start = 24.dp)
             )
         }
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             RadioButton(
-                selected = selectedOption == "Parece una tortuga, serpiente o lagarto?",
-                onClick = { selectedOption = "Parece una tortuga, serpiente o lagarto?" }
+                selected = selectedOption == "3",
+                onClick = { selectedOption = "3" }
             )
             Text(
-                text = "Parece una tortuga, serpiente o lagarto?",
+                text = "Parece una tortuga, serpiente o lagarto (Reptiles)",
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(start = 24.dp)
             )
         }
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             RadioButton(
-                selected = selectedOption == "Otros",
-                onClick = { selectedOption = "Otros" }
+                selected = selectedOption == "4",
+                onClick = { selectedOption = "4" }
             )
             Text(
-                text = "Otros",
+                text = "Parece un sapo, rana o lagarto de agua (Anfibios)",
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(start = 24.dp)
             )
         }
         Button(
             onClick = {
+                when(selectedOption){
+                    "4" -> navController.navigate("Amphibia_questions")
+                }
                 println("Respuesta seleccionada: $selectedOption")
             }
         ) {
@@ -79,12 +91,12 @@ fun AnimalTypeQuestionScreen() {
 }
 
 @Composable
-fun CategoryQuestion() {
-    AnimalTypeQuestionScreen()
+fun CategoryQuestion(navController: NavController) {
+    AnimalTypeQuestionScreen(navController)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewQuestion() {
-    CategoryQuestion()
+    CategoryQuestion(navController = NavHostController(LocalContext.current))
 }

@@ -62,19 +62,23 @@ fun FaunaValApp(modifier: Modifier = Modifier, viewModel: AnimalViewModel = hilt
             modifier = modifier.padding(innerPadding)
         )
         {
-            composable("Start") {
+            composable("Start")
+            {
                 StartScreen(navController)
-
             }
             composable("Categories") {
                 CategoriesScreen(navController)
             }
             composable(
-                "AnimalList/{categoryId}",
-                arguments = listOf(navArgument("categoryId") { type = NavType.IntType })
+                "AnimalList/{categoryId}?filter={filter}",
+                arguments = listOf(
+                    navArgument("categoryId") { type = NavType.IntType },
+                    navArgument("filter") { defaultValue = "" }
+                )
             ) { backStackEntry ->
                 val categoryId = backStackEntry.arguments?.getInt("categoryId") ?: 0
-                AnimalListScreen(navController, categoryId)
+                val filter = backStackEntry.arguments?.getString("filter")
+                AnimalListScreen(navController, categoryId, filter)
             }
             composable(
                 "AnimalDetail/{animalId}",
@@ -84,8 +88,16 @@ fun FaunaValApp(modifier: Modifier = Modifier, viewModel: AnimalViewModel = hilt
                 val animal = runBlocking { viewModel.getAnimal(index) }
                 AnimalDetail(animal)
             }
-            composable("Contact") {
+            composable("Contact")
+            {
                 ContactForm()
+            }
+            composable("Identify")
+            {
+                CategoryQuestion(navController)
+            }
+            composable("Amphibia_questions") {
+                AmphibiaIdentificationPage(navController = navController)
             }
         }
     }

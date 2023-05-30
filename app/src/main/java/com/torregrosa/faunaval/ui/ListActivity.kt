@@ -1,5 +1,6 @@
 package com.torregrosa.faunaval.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -92,9 +93,15 @@ private fun AnimalList(
 fun AnimalListScreen(
     navController: NavHostController,
     categoryId: Int,
+    filter: String?,
     viewModel: AnimalViewModel = hiltViewModel()
 ) {
-    AnimalList(navController, runBlocking { viewModel.getAnimalList(categoryId) })
+    if (filter != "") {
+        AnimalList(navController, runBlocking { viewModel.getAnimalListFiltered(categoryId, filter) })
+    } else {
+        AnimalList(navController, runBlocking { viewModel.getAnimalList(categoryId) })
+    }
+
 }
 
 @Preview(showBackground = true)

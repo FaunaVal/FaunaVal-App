@@ -43,7 +43,9 @@ fun StartScreen(
     ) {
         TitleImage()
         Spacer(modifier = Modifier.height(8.dp))
-        SelectOptionButton(labelResourceId = R.string.identificar, onClick = { /*TODO*/ })
+        SelectOptionButton(
+            labelResourceId = R.string.identificar,
+            onClick = { navController.navigate("Identify") })
         SelectOptionButton(
             labelResourceId = R.string.explorar,
             onClick = { navController.navigate("Categories") })

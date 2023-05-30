@@ -7,6 +7,7 @@ import javax.inject.Inject
 interface AnimalRepository {
 
     suspend fun getAnimalList(id: Int): List<Animal>
+    suspend fun getAnimalListFiltered(id: Int, filter: String?): List<Animal>
     suspend fun getAnimalById(id: Int): Animal
 }
 
@@ -16,6 +17,10 @@ class AnimalRepositoryImp @Inject constructor(
 
     override suspend fun getAnimalList(id: Int): List<Animal> {
         return restDataSource.getAnimalList(id)
+    }
+
+    override suspend fun getAnimalListFiltered(id: Int, filter: String?): List<Animal> {
+        return restDataSource.getAnimalListFiltered(id, filter)
     }
 
     override suspend fun getAnimalById(id: Int): Animal {

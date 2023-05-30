@@ -11,6 +11,12 @@ interface RestDataSource {
         @Path("id") id: Int
     ): List<Animal>
 
+    @GET("animales/list/{id}/{filter}")
+    suspend fun getAnimalListFiltered(
+        @Path("id") id: Int,
+        @Path("filter") filter: String?
+    ): List<Animal>
+
     @GET("animales/{id}")
     suspend fun getAnimalById(
         @Path("id") id: Int
