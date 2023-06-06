@@ -19,4 +19,12 @@
     <string name="elige_cliente">\"Elija un cliente de Email : \"</string>
     <string name="enviar_boton">Enviar Email</string>
     <string name="colabora_text">Si quieres colaborar, ya sea sugiriendo un animal que falta o corrigiendo algún error, rellena el siguiente formulario:</string>
+    <string name="cuestionario_titulo">Cuestionario</string>
+    <string name="cuestionario_text">Responde a las siguientes peguntas y te ayudaremos a identificar al animal:</string>
+    <string name="categoria_pregunta">¿Qué tipo de animal buscas?</string>
+    <string name="categoria_respuesta_1">Animal con pelo y 4 patas (Mamífero)</string>
+    <string name="categoria_respuesta_2">Animal con plumas, alas y pico (Aves)</string>
+    <string name="categoria_respuesta_3">Parece una tortuga, serpiente o lagarto (Reptiles)</string>
+    <string name="categoria_respuesta_4">Parece un sapo, rana o lagarto de agua (Anfibios)</string>
+    <string name="siguiente">Siguiente</string>
 </resources>

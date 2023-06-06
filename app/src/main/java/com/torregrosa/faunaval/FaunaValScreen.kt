@@ -3,7 +3,7 @@ package com.torregrosa.faunaval
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,12 +15,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.torregrosa.faunaval.ui.*
+import com.torregrosa.faunaval.ui.identify.AmphibiaIdentificationPage
+import com.torregrosa.faunaval.ui.identify.CategoryQuestion
 import com.torregrosa.faunaval.ui.theme.BackgroundColor
 import kotlinx.coroutines.runBlocking
 
 @Composable
 fun FaunaValAppBar(
-    canNavigateBack: Boolean,
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -29,13 +30,11 @@ fun FaunaValAppBar(
         modifier = modifier,
         backgroundColor = BackgroundColor,
         navigationIcon = {
-            if (canNavigateBack) {
-                IconButton(onClick = navigateUp) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = "Atrás"
-                    )
-                }
+            IconButton(onClick = navigateUp) {
+                Icon(
+                    imageVector = Icons.Filled.Home,
+                    contentDescription = "Atrás"
+                )
             }
         }
     )
@@ -44,15 +43,10 @@ fun FaunaValAppBar(
 @Composable
 fun FaunaValApp(modifier: Modifier = Modifier, viewModel: AnimalViewModel = hiltViewModel()) {
     val navController = rememberNavController()
-    // TODO: Get current back stack entry
-
-    // TODO: Get the name of the current screen
-
     Scaffold(
         topBar = {
             FaunaValAppBar(
-                canNavigateBack = false,
-                navigateUp = { /* TODO: implement back navigation */ }
+                navigateUp = { navController.navigate("Start") }
             )
         }
     ) { innerPadding ->

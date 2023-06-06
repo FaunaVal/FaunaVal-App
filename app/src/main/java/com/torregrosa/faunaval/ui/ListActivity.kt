@@ -1,6 +1,5 @@
 package com.torregrosa.faunaval.ui
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -79,7 +78,7 @@ private fun AnimalList(
 ) {
     LazyColumn(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .background(BackgroundColor),
         contentPadding = PaddingValues(10.dp),
     ) {
@@ -97,7 +96,9 @@ fun AnimalListScreen(
     viewModel: AnimalViewModel = hiltViewModel()
 ) {
     if (filter != "") {
-        AnimalList(navController, runBlocking { viewModel.getAnimalListFiltered(categoryId, filter) })
+        AnimalList(
+            navController,
+            runBlocking { viewModel.getAnimalListFiltered(categoryId, filter) })
     } else {
         AnimalList(navController, runBlocking { viewModel.getAnimalList(categoryId) })
     }

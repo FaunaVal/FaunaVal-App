@@ -1,4 +1,4 @@
-package com.torregrosa.faunaval.ui
+package com.torregrosa.faunaval.ui.identify
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -88,6 +88,7 @@ fun QuestionScreen(navController: NavController) {
                         // Ejecutar función cuando la respuesta es negativa (Piel)
                         searchFunction("0", navController)
                     }
+                    else -> {answers = ""}
                 }
                 answers = ""
             },
