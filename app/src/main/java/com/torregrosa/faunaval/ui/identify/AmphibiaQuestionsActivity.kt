@@ -1,66 +1,115 @@
 package com.torregrosa.faunaval.ui.identify
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.torregrosa.faunaval.App
+import com.torregrosa.faunaval.R
+import com.torregrosa.faunaval.ui.theme.BackgroundColor
+import com.torregrosa.faunaval.ui.theme.ButtonColor
 
 sealed class Question(val text: String)
 
-object InitialQuestion : Question("¿Tiene cola?")
-object BodyQuestion : Question("¿Tiene el cuerpo rechoncho y las patas cortas?")
-object EyeQuestion : Question("¿Tiene el iris del ojo anaranjado o rojo?")
-object SkinQuestion : Question("¿Tiene puntos anaranjados en la piel?")
+object InitialQuestion : Question(App.context.getString(R.string.anfibios_pregunta_1))
+object BodyQuestion : Question(App.context.getString(R.string.anfibios_pregunta_2))
+object EyeQuestion : Question(App.context.getString(R.string.anfibios_pregunta_3))
+object SkinQuestion : Question(App.context.getString(R.string.anfibios_pregunta_4))
 
 @Composable
-fun QuestionScreen(navController: NavController) {
+fun QuestionsScreen(navController: NavController) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(BackgroundColor),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        TitleQuestions()
+        QuestionsColumn(navController = navController)
+    }
+
+}
+
+@Composable
+fun QuestionsColumn(navController: NavController) {
     var currentQuestion by remember { mutableStateOf<Question>(InitialQuestion) }
     var answers by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            .padding(start = 10.dp, end = 10.dp)
+            .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(10.dp))
+            .background(ButtonColor)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = currentQuestion.text,
             style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(16.dp)
         )
         Row(
             modifier = Modifier.padding(bottom = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            RadioButton(
+            RadioButtonOption(
                 selected = answers == "1",
-                onClick = { answers = "1" })
-            Text(
-                text = "yes",
-                style = MaterialTheme.typography.body1
+                onClick = { answers = "1" },
+                resLabel = R.string.si
             )
             Spacer(
                 modifier = Modifier.width(16.dp)
             )
-            RadioButton(
+            RadioButtonOption(
                 selected = answers == "0",
-                onClick = { answers = "0" })
-            Text(
-                text = "no",
-                style = MaterialTheme.typography.body1
+                onClick = { answers = "0" },
+                resLabel = R.string.no
             )
         }
+    }
+
+    Row(
+        modifier = Modifier.padding(10.dp)
+    ) {
         Button(
+            modifier = Modifier
+                .widthIn(min = 150.dp)
+                .padding(bottom = 30.dp, end = 10.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = ButtonColor
+            ),
+            onClick = {
+                currentQuestion = InitialQuestion
+                answers = ""
+            }
+        ) {
+            Text(text = stringResource(R.string.boton_atras), style = MaterialTheme.typography.h5)
+        }
+        Button(
+            modifier = Modifier
+                .widthIn(min = 150.dp)
+                .padding(bottom = 30.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = ButtonColor
+            ),
             onClick = {
                 when (currentQuestion) {
                     InitialQuestion -> if (answers == "1") {
@@ -88,21 +137,14 @@ fun QuestionScreen(navController: NavController) {
                         // Ejecutar función cuando la respuesta es negativa (Piel)
                         searchFunction("0", navController)
                     }
-                    else -> {answers = ""}
                 }
                 answers = ""
             },
-            modifier = Modifier.padding(bottom = 16.dp)
         ) {
-            Text(text = "Next")
-        }
-        Button(
-            onClick = {
-                currentQuestion = InitialQuestion
-                answers = ""
-            }
-        ) {
-            Text(text = "Back")
+            Text(
+                text = stringResource(R.string.boton_siguiente),
+                style = MaterialTheme.typography.h5
+            )
         }
     }
 }
@@ -113,7 +155,7 @@ fun searchFunction(query: String, navController: NavController) {
 
 @Composable
 fun AmphibiaIdentificationPage(navController: NavController) {
-    QuestionScreen(navController)
+    QuestionsScreen(navController)
 }
 
 @Preview(showBackground = true)

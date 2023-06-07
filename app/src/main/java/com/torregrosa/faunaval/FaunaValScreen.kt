@@ -1,13 +1,18 @@
 package com.torregrosa.faunaval
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -31,10 +36,17 @@ fun FaunaValAppBar(
         backgroundColor = BackgroundColor,
         navigationIcon = {
             IconButton(onClick = navigateUp) {
-                Icon(
-                    imageVector = Icons.Filled.Home,
-                    contentDescription = "Atrás"
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Home,
+                        contentDescription = "Atrás",
+                    )
+                    Text(text = "Home", fontSize = 10.sp)
+                }
             }
         }
     )

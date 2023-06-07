@@ -4,10 +4,8 @@ import com.torregrosa.faunaval.repository.AnimalRepository
 import com.torregrosa.faunaval.repository.AnimalRepositoryImp
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Named
 import javax.inject.Singleton
 
 

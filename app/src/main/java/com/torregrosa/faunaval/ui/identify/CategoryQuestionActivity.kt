@@ -44,7 +44,7 @@ fun CategoryQuestions(navController: NavController) {
     var selectedOption by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
-            .padding(start = 10.dp, end = 10.dp, top = 30.dp)
+            .padding(start = 10.dp, end = 10.dp)
             .clip(shape = RoundedCornerShape(10.dp))
             .background(ButtonColor)
             .verticalScroll(rememberScrollState()),

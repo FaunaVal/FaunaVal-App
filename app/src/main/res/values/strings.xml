@@ -27,4 +27,12 @@
     <string name="categoria_respuesta_3">Parece una tortuga, serpiente o lagarto (Reptiles)</string>
     <string name="categoria_respuesta_4">Parece un sapo, rana o lagarto de agua (Anfibios)</string>
     <string name="siguiente">Siguiente</string>
+    <string name="anfibios_pregunta_1">¿Tiene cola?</string>
+    <string name="anfibios_pregunta_2">¿Tiene el cuerpo rechoncho y las patas cortas?</string>
+    <string name="anfibios_pregunta_3">¿Tiene el iris del ojo anaranjado o rojo?</string>
+    <string name="anfibios_pregunta_4">¿Tiene puntos anaranjados en la piel?</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="boton_siguiente">Siguiente</string>
+    <string name="boton_atras">Atrás</string>
 </resources>
