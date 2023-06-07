@@ -3,11 +3,14 @@ package com.torregrosa.faunaval.ui
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -17,10 +20,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 import com.torregrosa.faunaval.R
 import com.torregrosa.faunaval.model.Animal
 import com.torregrosa.faunaval.model.Foto
 import com.torregrosa.faunaval.ui.theme.BackgroundColor
+import com.torregrosa.faunaval.ui.theme.ButtonColor
 import com.torregrosa.faunaval.ui.theme.TextBackgroundColor
 
 @Composable
@@ -28,8 +35,11 @@ fun AnimalDetail(animal: Animal) {
     AnimalDetailColumn(animal = animal)
 }
 
+
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun AnimalDetailColumn(animal: Animal) {
+    val pagerState = rememberPagerState(pageCount = animal.fotos.size)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -37,7 +47,15 @@ fun AnimalDetailColumn(animal: Animal) {
             .background(BackgroundColor),
         verticalArrangement = Arrangement.Top,
     ) {
-        AnimalImage(url = animal.fotos[0].url)
+        HorizontalPager(state = pagerState) { page ->
+            val imageUrl = animal.fotos[page]
+            Box(modifier = Modifier.fillMaxSize()) {
+                AnimalImage(url = imageUrl.url)
+            }
+        }
+        if (animal.fotos.size > 1) {
+            DotsIndicator(totalDots = animal.fotos.size, selectedIndex = pagerState.currentPage)
+        }
         InfoColumn(animal = animal)
         DescriptionColumn(description = animal.descripcion)
     }
@@ -99,6 +117,41 @@ fun TextInfoH6(info: String) {
         color = Color.White,
         modifier = Modifier.padding(bottom = 5.dp)
     )
+}
+
+@Composable
+fun DotsIndicator(
+    totalDots: Int,
+    selectedIndex: Int
+) {
+    LazyRow(
+        modifier = Modifier
+            .padding(vertical = 5.dp)
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        horizontalArrangement = Arrangement.Center,
+    ) {
+        items(totalDots) { index ->
+            if (index == selectedIndex) {
+                Box(
+                    modifier = Modifier
+                        .size(10.dp)
+                        .clip(CircleShape)
+                        .background(color = ButtonColor)
+                )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .size(10.dp)
+                        .clip(CircleShape)
+                        .background(color = TextBackgroundColor.copy(alpha = 0.5f))
+                )
+            }
+            if (index != totalDots - 1) {
+                Spacer(modifier = Modifier.padding(horizontal = 2.dp))
+            }
+        }
+    }
 }
 
 @Composable
