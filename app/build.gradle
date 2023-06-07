@@ -71,6 +71,8 @@ dependencies {
     //Coil (images)
     implementation 'io.coil-kt:coil-compose:2.3.0'
     implementation 'com.google.accompanist:accompanist-insets:0.24.1-alpha'
+    //ViewPager
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
     //Tests
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
