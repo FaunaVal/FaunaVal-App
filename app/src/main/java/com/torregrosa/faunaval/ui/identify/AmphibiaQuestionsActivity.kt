@@ -97,10 +97,17 @@ fun QuestionsColumn(navController: NavController) {
                 backgroundColor = ButtonColor
             ),
             onClick = {
-                if(currentQuestion == InitialQuestion){
+                if (currentQuestion == InitialQuestion) {
                     navController.navigate("Identify")
-                }else{
-                    currentQuestion = InitialQuestion
+                } else {
+                    when (currentQuestion) {
+                        BodyQuestion -> currentQuestion = InitialQuestion
+                        EyeQuestion -> currentQuestion = BodyQuestion
+                        SkinQuestion -> currentQuestion = EyeQuestion
+                        else -> {
+                            navController.navigate("Identify")
+                        }
+                    }
                     answers = "1"
                 }
             }
