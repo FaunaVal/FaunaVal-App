@@ -18,8 +18,6 @@ class RepositoryModule {
     @Provides
     @Singleton
     @Named("BaseUrl")
-
-    //fun provideBaseUrl() = "http://192.168.0.103:8080/ctn/"
     fun provideBaseUrl() = "http://34.228.25.144:8080/ctn/"
 
     @Provides

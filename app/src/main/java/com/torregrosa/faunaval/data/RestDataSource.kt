@@ -21,5 +21,4 @@ interface RestDataSource {
     suspend fun getAnimalById(
         @Path("id") id: Int
     ): Animal
-
 }

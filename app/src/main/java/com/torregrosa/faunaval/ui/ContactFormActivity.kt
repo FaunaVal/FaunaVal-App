@@ -152,7 +152,7 @@ fun CustomNameField(nameBody: MutableState<TextFieldValue>, hint: String) {
             .clip(shape = RoundedCornerShape(10.dp)),
         textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
         singleLine = true,
-        colors = MyAppTextFieldColors()
+        colors = textFieldColors()
     )
     Spacer(modifier = Modifier.height(10.dp))
 }
@@ -169,7 +169,7 @@ fun CustomEmailField(emailBody: MutableState<TextFieldValue>, hint: String) {
             .clip(shape = RoundedCornerShape(10.dp)),
         textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
         singleLine = true,
-        colors = MyAppTextFieldColors()
+        colors = textFieldColors()
     )
     Spacer(modifier = Modifier.height(10.dp))
 }
@@ -186,13 +186,13 @@ fun CustomTextField(textBody: MutableState<TextFieldValue>, hint: String) {
             .height(120.dp)
             .clip(shape = RoundedCornerShape(10.dp)),
         textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
-        colors = MyAppTextFieldColors()
+        colors = textFieldColors()
     )
     Spacer(modifier = Modifier.height(20.dp))
 }
 
 @Composable
-fun MyAppTextFieldColors() = TextFieldDefaults.textFieldColors(
+fun textFieldColors() = TextFieldDefaults.textFieldColors(
     backgroundColor = Color.White,
     focusedIndicatorColor = BackgroundColor,
     focusedLabelColor = BackgroundColor,

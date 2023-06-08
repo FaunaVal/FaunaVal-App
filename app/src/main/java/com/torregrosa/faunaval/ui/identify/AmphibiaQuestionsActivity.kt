@@ -49,7 +49,7 @@ fun QuestionsScreen(navController: NavController) {
 @Composable
 fun QuestionsColumn(navController: NavController) {
     var currentQuestion by remember { mutableStateOf<Question>(InitialQuestion) }
-    var answers by remember { mutableStateOf("") }
+    var answers by remember { mutableStateOf("1") }
 
     Column(
         modifier = Modifier
@@ -97,8 +97,12 @@ fun QuestionsColumn(navController: NavController) {
                 backgroundColor = ButtonColor
             ),
             onClick = {
-                currentQuestion = InitialQuestion
-                answers = ""
+                if(currentQuestion == InitialQuestion){
+                    navController.navigate("Identify")
+                }else{
+                    currentQuestion = InitialQuestion
+                    answers = "1"
+                }
             }
         ) {
             Text(text = stringResource(R.string.boton_atras), style = MaterialTheme.typography.h5)
@@ -138,7 +142,7 @@ fun QuestionsColumn(navController: NavController) {
                         searchFunction("0", navController)
                     }
                 }
-                answers = ""
+                answers = "1"
             },
         ) {
             Text(

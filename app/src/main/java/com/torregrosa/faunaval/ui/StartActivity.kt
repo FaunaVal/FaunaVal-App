@@ -87,10 +87,7 @@ fun TitleImage(modifier: Modifier = Modifier) {
     }
 }
 
-/**
- * Customizable button composable that displays the [labelResourceId]
- * and triggers [onClick] lambda when this composable is clicked
- */
+
 @Composable
 fun SelectOptionButton(
     @StringRes labelResourceId: Int,
